@@ -50,10 +50,21 @@
             TracksGridView = new DataGridView();
             TracksLabel = new Label();
             LyricsBox = new RichTextBox();
+            AddTrack = new GroupBox();
+            AddTrackButton = new Button();
+            TrackLyricsPrompt = new RichTextBox();
+            TrackUrlPrompt = new TextBox();
+            TrackNumberPrompt = new TextBox();
+            TrackTitlePrompt = new TextBox();
+            LyricsLbl = new Label();
+            TrackUrlLbl = new Label();
+            TrackNumberLbl = new Label();
+            TrackTitleLbl = new Label();
             ((System.ComponentModel.ISupportInitialize)gridView).BeginInit();
             ((System.ComponentModel.ISupportInitialize)AlbumThumb).BeginInit();
             AddAlbumBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)TracksGridView).BeginInit();
+            AddTrack.SuspendLayout();
             SuspendLayout();
             // 
             // LoadAlbum
@@ -95,7 +106,7 @@
             // 
             // AlbumThumb
             // 
-            AlbumThumb.Location = new Point(418, 419);
+            AlbumThumb.Location = new Point(702, 12);
             AlbumThumb.Name = "AlbumThumb";
             AlbumThumb.Size = new Size(278, 184);
             AlbumThumb.SizeMode = PictureBoxSizeMode.Zoom;
@@ -115,7 +126,7 @@
             AddAlbumBox.Controls.Add(YearInput);
             AddAlbumBox.Controls.Add(ArtistInput);
             AddAlbumBox.Controls.Add(AlbumNameInput);
-            AddAlbumBox.Location = new Point(418, 198);
+            AddAlbumBox.Location = new Point(702, 202);
             AddAlbumBox.Name = "AddAlbumBox";
             AddAlbumBox.Size = new Size(278, 215);
             AddAlbumBox.TabIndex = 5;
@@ -236,7 +247,7 @@
             TracksGridView.Location = new Point(12, 222);
             TracksGridView.Name = "TracksGridView";
             TracksGridView.ReadOnly = true;
-            TracksGridView.Size = new Size(400, 150);
+            TracksGridView.Size = new Size(684, 150);
             TracksGridView.TabIndex = 8;
             TracksGridView.CellContentClick += TracksGridView_CellContentClick;
             // 
@@ -254,15 +265,110 @@
             LyricsBox.Location = new Point(12, 378);
             LyricsBox.Name = "LyricsBox";
             LyricsBox.ReadOnly = true;
-            LyricsBox.Size = new Size(194, 225);
+            LyricsBox.Size = new Size(291, 225);
             LyricsBox.TabIndex = 10;
             LyricsBox.Text = "";
+            // 
+            // AddTrack
+            // 
+            AddTrack.Controls.Add(AddTrackButton);
+            AddTrack.Controls.Add(TrackLyricsPrompt);
+            AddTrack.Controls.Add(TrackUrlPrompt);
+            AddTrack.Controls.Add(TrackNumberPrompt);
+            AddTrack.Controls.Add(TrackTitlePrompt);
+            AddTrack.Controls.Add(LyricsLbl);
+            AddTrack.Controls.Add(TrackUrlLbl);
+            AddTrack.Controls.Add(TrackNumberLbl);
+            AddTrack.Controls.Add(TrackTitleLbl);
+            AddTrack.Location = new Point(702, 423);
+            AddTrack.Name = "AddTrack";
+            AddTrack.Size = new Size(278, 180);
+            AddTrack.TabIndex = 11;
+            AddTrack.TabStop = false;
+            AddTrack.Text = "Add Tracks to Album";
+            // 
+            // AddTrackButton
+            // 
+            AddTrackButton.Location = new Point(6, 151);
+            AddTrackButton.Name = "AddTrackButton";
+            AddTrackButton.Size = new Size(75, 23);
+            AddTrackButton.TabIndex = 8;
+            AddTrackButton.Text = "Add";
+            AddTrackButton.UseVisualStyleBackColor = true;
+            AddTrackButton.Click += AddTrackButton_Click;
+            // 
+            // TrackLyricsPrompt
+            // 
+            TrackLyricsPrompt.Location = new Point(90, 101);
+            TrackLyricsPrompt.Name = "TrackLyricsPrompt";
+            TrackLyricsPrompt.Size = new Size(182, 73);
+            TrackLyricsPrompt.TabIndex = 7;
+            TrackLyricsPrompt.Text = "";
+            // 
+            // TrackUrlPrompt
+            // 
+            TrackUrlPrompt.Location = new Point(90, 72);
+            TrackUrlPrompt.Name = "TrackUrlPrompt";
+            TrackUrlPrompt.Size = new Size(182, 23);
+            TrackUrlPrompt.TabIndex = 6;
+            // 
+            // TrackNumberPrompt
+            // 
+            TrackNumberPrompt.Location = new Point(90, 46);
+            TrackNumberPrompt.Name = "TrackNumberPrompt";
+            TrackNumberPrompt.Size = new Size(182, 23);
+            TrackNumberPrompt.TabIndex = 5;
+            TrackNumberPrompt.Text = "0";
+            // 
+            // TrackTitlePrompt
+            // 
+            TrackTitlePrompt.Location = new Point(90, 21);
+            TrackTitlePrompt.Name = "TrackTitlePrompt";
+            TrackTitlePrompt.Size = new Size(182, 23);
+            TrackTitlePrompt.TabIndex = 4;
+            // 
+            // LyricsLbl
+            // 
+            LyricsLbl.AutoSize = true;
+            LyricsLbl.Location = new Point(6, 106);
+            LyricsLbl.Name = "LyricsLbl";
+            LyricsLbl.Size = new Size(36, 15);
+            LyricsLbl.TabIndex = 3;
+            LyricsLbl.Text = "Lyrics";
+            // 
+            // TrackUrlLbl
+            // 
+            TrackUrlLbl.AutoSize = true;
+            TrackUrlLbl.Location = new Point(6, 75);
+            TrackUrlLbl.Name = "TrackUrlLbl";
+            TrackUrlLbl.Size = new Size(58, 15);
+            TrackUrlLbl.TabIndex = 2;
+            TrackUrlLbl.Text = "Track URL";
+            // 
+            // TrackNumberLbl
+            // 
+            TrackNumberLbl.AutoSize = true;
+            TrackNumberLbl.Location = new Point(6, 49);
+            TrackNumberLbl.Name = "TrackNumberLbl";
+            TrackNumberLbl.Size = new Size(81, 15);
+            TrackNumberLbl.TabIndex = 1;
+            TrackNumberLbl.Text = "Track Number";
+            // 
+            // TrackTitleLbl
+            // 
+            TrackTitleLbl.AutoSize = true;
+            TrackTitleLbl.Location = new Point(6, 24);
+            TrackTitleLbl.Name = "TrackTitleLbl";
+            TrackTitleLbl.Size = new Size(59, 15);
+            TrackTitleLbl.TabIndex = 0;
+            TrackTitleLbl.Text = "Track Title";
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(708, 615);
+            ClientSize = new Size(1023, 615);
+            Controls.Add(AddTrack);
             Controls.Add(LyricsBox);
             Controls.Add(TracksLabel);
             Controls.Add(TracksGridView);
@@ -281,6 +387,8 @@
             AddAlbumBox.ResumeLayout(false);
             AddAlbumBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)TracksGridView).EndInit();
+            AddTrack.ResumeLayout(false);
+            AddTrack.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -309,5 +417,15 @@
         private DataGridView TracksGridView;
         private Label TracksLabel;
         private RichTextBox LyricsBox;
+        private GroupBox AddTrack;
+        private Label LyricsLbl;
+        private Label TrackUrlLbl;
+        private Label TrackNumberLbl;
+        private Label TrackTitleLbl;
+        private TextBox TrackUrlPrompt;
+        private TextBox TrackNumberPrompt;
+        private TextBox TrackTitlePrompt;
+        private RichTextBox TrackLyricsPrompt;
+        private Button AddTrackButton;
     }
 }

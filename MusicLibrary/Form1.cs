@@ -1,9 +1,13 @@
+using Newtonsoft.Json.Linq;
+
 namespace MusicLibrary
 {
     public partial class Form1 : Form
     {
         BindingSource albumBindingSource = new BindingSource();
         BindingSource tracksBindingSource = new BindingSource();
+
+        public int AlbumID = 0;
 
         public Form1()
         {
@@ -51,7 +55,8 @@ namespace MusicLibrary
             AlbumThumb.LoadAsync(imageURL);
             //MessageBox.Show(imageURL);
 
-             int AlbumID = (int)dataGrid.Rows[currentRow].Cells[0].Value;
+            AlbumID = (int)dataGrid.Rows[currentRow].Cells[0].Value;
+            //MessageBox.Show("CELLCLICKTEST" + AlbumID);
 
             tracksBindingSource.DataSource = albumsDAO.getTracks(AlbumID);
 
@@ -86,6 +91,36 @@ namespace MusicLibrary
             String lyrics = lyricsDataView.Rows[currentRow].Cells[3].Value.ToString();
             //MessageBox.Show(lyrics);
             LyricsBox.Text = lyrics;
+        }
+
+        private void AddTrackButton_Click(object sender, EventArgs e)
+        {
+            JObject track = new JObject();
+
+
+            //MessageBox.Show("ADDTRACKTEST: "+AlbumID
+            if(!AlbumID.Equals(0))
+            {
+                String title = TrackTitlePrompt.Text;
+                int number = Int32.Parse(TrackNumberPrompt.Text);
+                String url = TrackUrlPrompt.Text;
+                String lyrics = TrackLyricsPrompt.Text;
+                MessageBox.Show($"ID:{AlbumID}\nTitle:{title}\nNumber:{number}\nURL:{url}\nLyricsStart:{lyrics}\nLyricsEnd");
+
+                track.Add("t",title);
+                track.Add("n",number);
+                track.Add("u",url);
+                track.Add("l",lyrics);
+                track.Add("id", AlbumID);
+
+                AlbumsDAO albumsDAO = new AlbumsDAO();
+                int result = albumsDAO.addTrack(track);
+                MessageBox.Show($"Added {result} new records");
+            }
+            else
+            {
+                MessageBox.Show("Choose album first");
+            }
         }
     }
 }

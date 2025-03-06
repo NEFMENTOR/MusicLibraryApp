@@ -112,6 +112,32 @@ namespace MusicLibrary
             return affectedRows;
         }
 
+        public int addTrack(JObject track)
+        {
+            String title = track.GetValue("t").ToString();
+            int number = Int32.Parse(track.GetValue("n").ToString());
+            String url = track.GetValue("u").ToString();
+            String lyrics = track.GetValue("l").ToString();
+            int id = Int32.Parse(track.GetValue("id").ToString());
+
+            String query = "INSERT INTO tracks (TRACK_TITLE, NUMBER, VIDEO_URL, Lyrics, albums_id) VALUES (@title, @number, @url, @lyrics, @albums_id)";
+
+            MySqlConnection connection = new MySqlConnection(connString);
+            connection.Open();
+
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = connection;
+            cmd.CommandText = query;
+            cmd.Parameters.AddWithValue("@title", title);
+            cmd.Parameters.AddWithValue("@number", number);
+            cmd.Parameters.AddWithValue("@url", url);
+            cmd.Parameters.AddWithValue("@lyrics", lyrics);
+            cmd.Parameters.AddWithValue("@albums_id", id);
+            int affectedRows = cmd.ExecuteNonQuery();
+            connection.Close();
+            return affectedRows;
+        }
+
         public void editRecord(Album album)
         {
 
