@@ -1,4 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +35,14 @@ namespace MusicLibrary
             {
                 while (reader.Read())
                 {
+                    //JObject album = new JObject();
+
+                    //for(int i = 0; i < reader.FieldCount; i++)
+                    //{
+                    //    album.Add(reader.GetName(i).ToString(), reader.GetValue(i).ToString());
+                    //}
+                    //albums.Add(album);
+
                     Album a = new Album
                     {
                         ID = reader.GetInt32(0),
@@ -50,14 +59,14 @@ namespace MusicLibrary
             return albums;
         }
 
-        public List<Track> getTracks(int albumID)
+        public List<JObject> getTracks(int albumID)
         {
-            List<Track> tracks = new List<Track>();
+            List<JObject> tracks = new List<JObject>();
 
             MySqlConnection connection = new MySqlConnection(connString);
             connection.Open();
 
-            String query = "SELECT tracks.ID, tracks.TRACK_TITLE, albums.ALBUM_TITLE,tracks.NUMBER, tracks.VIDEO_URL, tracks.Lyrics\r\nFROM tracks\r\nINNER JOIN albums ON tracks.albums_ID=albums.ID\r\nWHERE albums.ID = @albumID";
+            String query = "SELECT tracks.TRACK_TITLE, albums.ALBUM_TITLE, tracks.VIDEO_URL, tracks.Lyrics\r\nFROM tracks\r\nINNER JOIN albums ON tracks.albums_ID=albums.ID\r\nWHERE albums.ID = @albumID";
             MySqlCommand cmd = new MySqlCommand();
             cmd.CommandText = query;
             cmd.Parameters.AddWithValue("@albumID", albumID);
@@ -68,15 +77,12 @@ namespace MusicLibrary
             {
                 while (r.Read())
                 {
-                    Track track = new Track
+                    JObject track = new JObject();
+
+                    for(int i = 0; i < r.FieldCount; i++)
                     {
-                        ID = r.GetInt32(0),
-                        trackTitle = r.GetString(1),
-                        albumTitle = r.GetString(2),
-                        number = r.GetInt32(3),
-                        videoUrl = r.GetString(4),
-                        lyrics = r.GetString(5),
-                    };
+                        track.Add(r.GetName(i).ToString(), r.GetValue(i).ToString());
+                    }
                     tracks.Add(track);
                 }
             }

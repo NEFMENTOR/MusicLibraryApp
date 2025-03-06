@@ -28,3 +28,4 @@ C:\c#\MusicLibrary\MusicLibrary\bin\Debug\net9.0-windows\runtimes\win-x64\native
 C:\c#\MusicLibrary\MusicLibrary\bin\Debug\net9.0-windows\runtimes\win-x64\native\krbcc64.dll
 C:\c#\MusicLibrary\MusicLibrary\obj\Debug\net9.0-windows\MusicLibrary.csproj.AssemblyReference.cache
 C:\c#\MusicLibrary\MusicLibrary\obj\Debug\net9.0-windows\MusicLib.32EFE751.Up2Date
+C:\c#\MusicLibrary\MusicLibrary\bin\Debug\net9.0-windows\Newtonsoft.Json.dll

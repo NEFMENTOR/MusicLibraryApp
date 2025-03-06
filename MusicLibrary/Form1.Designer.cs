@@ -235,6 +235,7 @@
             TracksGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             TracksGridView.Location = new Point(12, 222);
             TracksGridView.Name = "TracksGridView";
+            TracksGridView.ReadOnly = true;
             TracksGridView.Size = new Size(400, 150);
             TracksGridView.TabIndex = 8;
             TracksGridView.CellContentClick += TracksGridView_CellContentClick;

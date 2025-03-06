@@ -51,7 +51,7 @@ namespace MusicLibrary
             AlbumThumb.LoadAsync(imageURL);
             //MessageBox.Show(imageURL);
 
-            int AlbumID = (int)dataGrid.Rows[currentRow].Cells[0].Value;
+             int AlbumID = (int)dataGrid.Rows[currentRow].Cells[0].Value;
 
             tracksBindingSource.DataSource = albumsDAO.getTracks(AlbumID);
 
@@ -83,7 +83,7 @@ namespace MusicLibrary
 
             int currentRow = lyricsDataView.CurrentRow.Index;
             //MessageBox.Show("" + currentRow);
-            String lyrics = lyricsDataView.Rows[currentRow].Cells[5].Value.ToString();
+            String lyrics = lyricsDataView.Rows[currentRow].Cells[3].Value.ToString();
             //MessageBox.Show(lyrics);
             LyricsBox.Text = lyrics;
         }
