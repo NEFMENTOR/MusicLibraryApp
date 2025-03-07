@@ -52,6 +52,9 @@ namespace MusicLibrary
                         AlbumImage = reader.GetString(4),
                         AlbumAbout = reader.GetString(5)
                     };
+                    a.Tracks = getTracks(a.ID);
+
+
                     albums.Add(a);
                 }
             }
@@ -66,7 +69,7 @@ namespace MusicLibrary
             MySqlConnection connection = new MySqlConnection(connString);
             connection.Open();
 
-            String query = "SELECT tracks.TRACK_TITLE, albums.ALBUM_TITLE, tracks.VIDEO_URL, tracks.Lyrics\r\nFROM tracks\r\nINNER JOIN albums ON tracks.albums_ID=albums.ID\r\nWHERE albums.ID = @albumID";
+            String query = "SELECT tracks.ID, tracks.TRACK_TITLE, albums.ALBUM_TITLE, tracks.VIDEO_URL, tracks.Lyrics\r\nFROM tracks\r\nINNER JOIN albums ON tracks.albums_ID=albums.ID\r\nWHERE albums.ID = @albumID";
             MySqlCommand cmd = new MySqlCommand();
             cmd.CommandText = query;
             cmd.Parameters.AddWithValue("@albumID", albumID);
@@ -185,6 +188,19 @@ namespace MusicLibrary
             connection.Close();
 
             return albums;
+        }
+
+        public int deleteTrack(int trackID)
+        {
+            MySqlConnection connection = new MySqlConnection(connString);
+            connection.Open();
+
+            String query = "DELETE FROM tracks WHERE ID=@trackID";
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.Connection = connection;
+            cmd.CommandText = query;
+            cmd.Parameters.AddWithValue("@trackID", trackID);
+            return cmd.ExecuteNonQuery();
         }
 
     }

@@ -7,6 +7,8 @@ namespace MusicLibrary
         BindingSource albumBindingSource = new BindingSource();
         BindingSource tracksBindingSource = new BindingSource();
 
+        List<Album> albumsList = new List<Album>();
+
         public int AlbumID = 0;
 
         public Form1()
@@ -18,8 +20,9 @@ namespace MusicLibrary
         {
             AlbumsDAO albumsDAO = new AlbumsDAO();
 
+            albumsList = albumsDAO.getAlbums();
 
-            albumBindingSource.DataSource = albumsDAO.getAlbums();
+            albumBindingSource.DataSource = albumsList;
 
             gridView.DataSource = albumBindingSource;
         }
@@ -40,7 +43,7 @@ namespace MusicLibrary
 
         private void gridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            AlbumsDAO albumsDAO = new AlbumsDAO();
+            //AlbumsDAO albumsDAO = new AlbumsDAO();
 
             DataGridView dataGrid = (DataGridView)sender;
 
@@ -55,10 +58,12 @@ namespace MusicLibrary
             AlbumThumb.LoadAsync(imageURL);
             //MessageBox.Show(imageURL);
 
-            AlbumID = (int)dataGrid.Rows[currentRow].Cells[0].Value;
-            //MessageBox.Show("CELLCLICKTEST" + AlbumID);
+            //AlbumID = (int)dataGrid.Rows[currentRow].Cells[0].Value;
+            AlbumID = albumsList[currentRow].ID;
+            //MessageBox.Show("AlbumID1" + AlbumID + "\nAlbumID2" + AlbumID2);
 
-            tracksBindingSource.DataSource = albumsDAO.getTracks(AlbumID);
+
+            tracksBindingSource.DataSource = albumsList[currentRow].Tracks;
 
             TracksGridView.DataSource = tracksBindingSource;
 
@@ -88,7 +93,7 @@ namespace MusicLibrary
 
             int currentRow = lyricsDataView.CurrentRow.Index;
             //MessageBox.Show("" + currentRow);
-            String lyrics = lyricsDataView.Rows[currentRow].Cells[3].Value.ToString();
+            String lyrics = lyricsDataView.Rows[currentRow].Cells[4].Value.ToString();
             //MessageBox.Show(lyrics);
             LyricsBox.Text = lyrics;
         }
@@ -97,9 +102,8 @@ namespace MusicLibrary
         {
             JObject track = new JObject();
 
-
             //MessageBox.Show("ADDTRACKTEST: "+AlbumID
-            if(!AlbumID.Equals(0))
+            if (!AlbumID.Equals(0))
             {
                 String title = TrackTitlePrompt.Text;
                 int number = Int32.Parse(TrackNumberPrompt.Text);
@@ -107,20 +111,37 @@ namespace MusicLibrary
                 String lyrics = TrackLyricsPrompt.Text;
                 MessageBox.Show($"ID:{AlbumID}\nTitle:{title}\nNumber:{number}\nURL:{url}\nLyricsStart:{lyrics}\nLyricsEnd");
 
-                track.Add("t",title);
-                track.Add("n",number);
-                track.Add("u",url);
-                track.Add("l",lyrics);
+                track.Add("t", title);
+                track.Add("n", number);
+                track.Add("u", url);
+                track.Add("l", lyrics);
                 track.Add("id", AlbumID);
+
 
                 AlbumsDAO albumsDAO = new AlbumsDAO();
                 int result = albumsDAO.addTrack(track);
                 MessageBox.Show($"Added {result} new records");
+
+                TrackTitlePrompt.Text = "";
+                TrackNumberPrompt.Text = "0";
+                TrackUrlPrompt.Text = "";
+                TrackLyricsPrompt.Text = "";
             }
             else
             {
                 MessageBox.Show("Choose album first");
             }
+        }
+
+        private void DeleteTrackBtn_Click(object sender, EventArgs e)
+        {
+            DataGridView trackGrid = TracksGridView;
+            
+            int currentRow = trackGrid.CurrentRow.Index;
+            int trackID = Int32.Parse(trackGrid.Rows[currentRow].Cells[0].Value.ToString());
+            AlbumsDAO albumsDao = new AlbumsDAO();
+            int res = albumsDao.deleteTrack(trackID);
+            MessageBox.Show($"Records deleted: {res}");
         }
     }
 }

@@ -60,6 +60,7 @@
             TrackUrlLbl = new Label();
             TrackNumberLbl = new Label();
             TrackTitleLbl = new Label();
+            DeleteTrackBtn = new Button();
             ((System.ComponentModel.ISupportInitialize)gridView).BeginInit();
             ((System.ComponentModel.ISupportInitialize)AlbumThumb).BeginInit();
             AddAlbumBox.SuspendLayout();
@@ -247,9 +248,9 @@
             TracksGridView.Location = new Point(12, 222);
             TracksGridView.Name = "TracksGridView";
             TracksGridView.ReadOnly = true;
-            TracksGridView.Size = new Size(684, 150);
+            TracksGridView.Size = new Size(400, 150);
             TracksGridView.TabIndex = 8;
-            TracksGridView.CellContentClick += TracksGridView_CellContentClick;
+            TracksGridView.CellClick += TracksGridView_CellContentClick;
             // 
             // TracksLabel
             // 
@@ -262,10 +263,10 @@
             // 
             // LyricsBox
             // 
-            LyricsBox.Location = new Point(12, 378);
+            LyricsBox.Location = new Point(418, 222);
             LyricsBox.Name = "LyricsBox";
             LyricsBox.ReadOnly = true;
-            LyricsBox.Size = new Size(291, 225);
+            LyricsBox.Size = new Size(278, 375);
             LyricsBox.TabIndex = 10;
             LyricsBox.Text = "";
             // 
@@ -363,11 +364,22 @@
             TrackTitleLbl.TabIndex = 0;
             TrackTitleLbl.Text = "Track Title";
             // 
+            // DeleteTrackBtn
+            // 
+            DeleteTrackBtn.Location = new Point(309, 379);
+            DeleteTrackBtn.Name = "DeleteTrackBtn";
+            DeleteTrackBtn.Size = new Size(103, 23);
+            DeleteTrackBtn.TabIndex = 12;
+            DeleteTrackBtn.Text = "Delete";
+            DeleteTrackBtn.UseVisualStyleBackColor = true;
+            DeleteTrackBtn.Click += DeleteTrackBtn_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1023, 615);
+            Controls.Add(DeleteTrackBtn);
             Controls.Add(AddTrack);
             Controls.Add(LyricsBox);
             Controls.Add(TracksLabel);
@@ -427,5 +439,6 @@
         private TextBox TrackTitlePrompt;
         private RichTextBox TrackLyricsPrompt;
         private Button AddTrackButton;
+        private Button DeleteTrackBtn;
     }
 }

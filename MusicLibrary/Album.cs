@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,5 +17,7 @@ namespace MusicLibrary
         public String AlbumAbout { get; set; }
 
         // TODO: List<Track> songs
+
+        public List<JObject> Tracks { get; set; }
     }
 }
