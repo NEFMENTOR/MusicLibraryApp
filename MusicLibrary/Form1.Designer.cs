@@ -138,9 +138,9 @@
             // 
             AddButton.Location = new Point(6, 177);
             AddButton.Name = "AddButton";
-            AddButton.Size = new Size(75, 23);
+            AddButton.Size = new Size(81, 23);
             AddButton.TabIndex = 10;
-            AddButton.Text = "Add";
+            AddButton.Text = "Add/Update";
             AddButton.UseVisualStyleBackColor = true;
             AddButton.Click += AddButton_Click;
             // 
@@ -232,6 +232,7 @@
             EditButton.TabIndex = 6;
             EditButton.Text = "Edit";
             EditButton.UseVisualStyleBackColor = true;
+            EditButton.Click += EditButton_Click;
             // 
             // DeleteButton
             // 

@@ -196,9 +196,9 @@ namespace MusicLibrary
             connection.Open();
 
             String query = "DELETE FROM tracks WHERE ID=@trackID";
-            MySqlCommand cmd = new MySqlCommand();
-            cmd.Connection = connection;
-            cmd.CommandText = query;
+            MySqlCommand cmd = new MySqlCommand(query,connection);
+            //cmd.Connection = connection;
+            //cmd.CommandText = query;
             cmd.Parameters.AddWithValue("@trackID", trackID);
             return cmd.ExecuteNonQuery();
         }

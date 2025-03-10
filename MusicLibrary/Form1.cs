@@ -126,6 +126,12 @@ namespace MusicLibrary
                 TrackNumberPrompt.Text = "0";
                 TrackUrlPrompt.Text = "";
                 TrackLyricsPrompt.Text = "";
+
+                // Refresh
+                DataGridView trackGrid = TracksGridView;
+                trackGrid.DataSource = null;
+                albumsList = albumsDAO.getAlbums();
+
             }
             else
             {
@@ -136,12 +142,21 @@ namespace MusicLibrary
         private void DeleteTrackBtn_Click(object sender, EventArgs e)
         {
             DataGridView trackGrid = TracksGridView;
-            
+
             int currentRow = trackGrid.CurrentRow.Index;
             int trackID = Int32.Parse(trackGrid.Rows[currentRow].Cells[0].Value.ToString());
             AlbumsDAO albumsDao = new AlbumsDAO();
             int res = albumsDao.deleteTrack(trackID);
             MessageBox.Show($"Records deleted: {res}");
+
+            // Refresh
+            trackGrid.DataSource = null;
+            albumsList = albumsDao.getAlbums();
+        }
+
+        private void EditButton_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
